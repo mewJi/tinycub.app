@@ -91,27 +91,11 @@ function TabBtn({ tb, active, accent, onClick, dot }) {
 
 // ── Scaling stage: fit the phone to the viewport ──────────
 function Stage() {
-  const [scale, setScale] = useA(1);
-  const W = 402, H = 874;
-  useAE(() => {
-    const fit = () => {
-      const m = 24;
-      const s = Math.min((window.innerWidth - m) / W, (window.innerHeight - m) / H, 1);
-      setScale(s);
-    };
-    fit();
-    window.addEventListener('resize', fit);
-    return () => window.removeEventListener('resize', fit);
-  }, []);
-  return (
-    <div style={{ minHeight: '100vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(120% 120% at 50% 0%, #F3EEE3 0%, #E8E1D2 100%)' }}>
-      <div style={{ transform: `scale(${scale})`, transformOrigin: 'center center' }}>
-        <window.IOSDevice width={W} height={H}>
-          <App />
-        </window.IOSDevice>
-      </div>
-    </div>
-  );
+  return <App />;
 }
+
+ReactDOM.createRoot(
+  document.getElementById('root')
+).render(<Stage />);
 
 ReactDOM.createRoot(document.getElementById('root')).render(<Stage />);
